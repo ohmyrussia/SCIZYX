@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SCIZYX – Decentralized Publishing & Peer Review on the Blockchain">
+  <title>SCIZYX – Science Without Borders</title>
+  <style>
+html {
+  scroll-behavior: smooth;
+}
+:root {
+  --primary: #6366f1;
+  --secondary: #8b5cf6;
+  --light: #f4f6f8;
+  --white: #ffffff;
+  --dark: #1f2937;
+  --gray: #e5e7eb;
+  --accent: #14b8a6;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 1000;
+  border-radius: 0 0 1rem 1rem;
+  flex-wrap: wrap;
+}
+.logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+nav a,
+#mobileNav a {
+  color: var(--dark);
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  transition: all 0.2s;
+}
+nav a.active,
+#mobileNav a.active {
+  font-weight: 700;
+  background: rgba(20, 184, 166, 0.15);
+  color: var(--dark);
+  padding: 0.4rem 1rem;
+  border-radius: 0.7rem;
+  display: inline-block;
+  margin: 0.25rem auto;
+  width: max-content;
+}
+.cta-button {
+  background: var(--accent);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  white-space: nowrap;
+}
+.cta-button:hover {
+  background: #0d9488;
+}
+.menu-toggle {
+  display: none;
+  background: var(--secondary);
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+}
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  width: max-content;
+  max-width: 90vw;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+  border-radius: 0.75rem;
+  padding: 1rem 0;
+  z-index: 1001;
+}
+.mobile-nav.hidden {
+  display: none !important;
+}
+.mobile-nav a {
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 10rem 2rem 6rem;
+  border-radius: 0 0 2rem 2rem;
+}
+.hero-section h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+.hero-section p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin-bottom: 2rem;
+}
+.section {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: auto;
+  border-radius: 1.5rem;
+  background: var(--white);
+  margin-top: 2rem;
+}
+.section.alt {
+  background: var(--gray);
+}
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.section-content {
+  flex: 1 1 380px;
+  min-width: 260px;
+}
+.section-flex {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.section-flex.reverse {
+  flex-direction: row-reverse;
+}
+.section-image {
+  flex: 0 0 320px;
+  height: 190px;
+  min-width: 240px;
+  background: #e5e7eb;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ul, ol {
+  padding-left: 1.25rem;
+}
+footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 2rem 2rem 0 0;
+}
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+/* Мобильная адаптация */
+@media (max-width: 900px) {
+  nav {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .cta-button {
+    padding: 0.6rem 0.8rem;
+  }
+}
+@media (max-width: 700px) {
+  .section-flex,
+  .section-flex.reverse {
+    flex-direction: column !important;
+    gap: 1.25rem;
+  }
+  .section-content,
+  .section-image {
+    flex: unset;
+    min-width: 0;
+    width: 100%;
+  }
+  .section-image {
+    height: 140px;
+    margin-bottom: 1rem;
+  }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+  will-change: opacity, transform;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+.cta-button {
+  transition: background 0.3s, opacity 0.7s, transform 0.7s;
+}
+.cta-button.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.cta-button.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+  </style>
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.toggle('hidden');
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="logo">SCIZYX</div>
+    <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#mission">Mission</a>
+      <a href="#problems">Problems</a>
+      <a href="#solution">Solution</a>
+      <a href="#how">How It Works</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#integrations">Integrations</a>
+    </nav>
+    <a class="cta-button" href="/whitepaper.pdf" download>Whitepaper</a>
+    <div id="mobileNav" class="mobile-nav hidden">
+      <a href="#">Home</a>
+      <a href="#mission">Mission</a>
+      <a href="#problems">Problems</a>
+      <a href="#solution">Solution</a>
+      <a href="#how">How It Works</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#integrations">Integrations</a>
+    </div>
+  </header>
+
+  <section class="hero-section">
+    <h1>SCIZYX — Science Without Borders</h1>
+    <p>Decentralized Publishing, Transparent Peer Review, Fair Token Rewards</p>
+    <a class="cta-button" href="/whitepaper.pdf" download>Download Whitepaper</a>
+  </section>
+
+  <section id="mission" class="section" style="box-shadow: 0 6px 32px 0 rgba(20,40,80,0.06);">
+    <h2 class="section-title">Mission & Goals</h2>
+    <div class="section-flex reverse">
+      <div class="section-content">
+        <p><strong>Mission:</strong> To build a global, decentralized ecosystem for scientific publishing where every researcher and reviewer receives transparent credit and fair token rewards for their contributions.</p>
+        <ul>
+          <li>Eliminate the monopoly of large publishers and remove financial access barriers.</li>
+          <li>Accelerate research dissemination and improve peer-review quality.</li>
+          <li>Level the playing field for scientists worldwide, regardless of geography or funding.</li>
+        </ul>
+      </div>
+      <div class="section-image">
+        <span style="color:#b0b7c3;">[Image]</span>
+        <!-- <img src="images/pic03.jpg" alt="" /> -->
+      </div>
+    </div>
+  </section>
+
+  <section id="solution" class="section" style="box-shadow: 0 6px 32px 0 rgba(20,40,80,0.06);">
+    <h2 class="section-title">Our Solution</h2>
+    <div class="section-flex">
+      <div class="section-content">
+        <p>SCIZYX leverages blockchain and smart contracts to create a decentralized platform for publishing and peer review. All actions are transparently recorded, and rewards are distributed fairly to authors, reviewers, and curators in tokens.</p>
+        <ul>
+          <li>Instant open access for all published articles</li>
+          <li>Transparent peer review and rating system</li>
+          <li>Smart contract-based reward distribution</li>
+          <li>Lower publication and review costs</li>
+        </ul>
+      </div>
+      <div class="section-image">
+        <span style="color:#b0b7c3;">[Image]</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section alt" style="box-shadow: 0 6px 32px 0 rgba(20,40,80,0.06);">
+    <h2 class="section-title">How It Works</h2>
+    <div class="section-flex reverse">
+      <div class="section-content">
+        <ol>
+          <li><strong>Submission:</strong> Authors submit their research via a decentralized portal.</li>
+          <li><strong>Peer Review:</strong> Reviewers are selected transparently and compensated in tokens.</li>
+          <li><strong>Publication:</strong> Accepted papers are immutably stored and open to all.</li>
+          <li><strong>Rewards:</strong> Tokens are distributed to all contributors automatically.</li>
+        </ol>
+      </div>
+      <div class="section-image">
+        <span style="color:#b0b7c3;">[Image]</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="tokenomics" class="section" style="box-shadow: 0 6px 32px 0 rgba(20,40,80,0.06);">
+    <h2 class="section-title">Tokenomics</h2>
+    <div class="section-flex">
+      <div class="section-content">
+        <ul>
+          <li><strong>Total Supply:</strong> 1,000,000,000 SCIX tokens</li>
+          <li><strong>Rewards:</strong> For publishing, reviewing, curation, and governance participation</li>
+          <li><strong>Governance:</strong> Token holders vote on protocol upgrades</li>
+          <li><strong>Staking:</strong> Incentives for long-term contributors</li>
+        </ul>
+      </div>
+      <div class="section-image">
+        <span style="color:#b0b7c3;">[Image]</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="integrations" class="section alt" style="box-shadow: 0 6px 32px 0 rgba(20,40,80,0.06);">
+    <h2 class="section-title">Integrations</h2>
+    <div class="section-flex reverse">
+      <div class="section-content">
+        <p>SCIZYX supports seamless integration with institutional repositories, data archives, grant agencies, and other blockchain-based research platforms.</p>
+        <ul>
+          <li>APIs for universities and libraries</li>
+          <li>Cross-chain interoperability for academic records</li>
+          <li>Integration with ORCID and research IDs</li>
+          <li>Open-source plugin ecosystem</li>
+        </ul>
+      </div>
+      <div class="section-image">
+        <span style="color:#b0b7c3;">[Image]</span>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top: 2rem;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 1.2rem;">
+      <div style="font-size: 2rem; font-weight: 700; letter-spacing: 2px;">SCIZYX</div>
+      <div style="font-size: 1.1rem; max-width: 500px; opacity: 0.8;">
+        Empowering Science Without Borders<br>
+        Decentralized. Transparent. Fair.
+      </div>
+      <div style="height: 1px; width: 80px; background: var(--accent); border-radius: 2px;"></div>
+      <div style="font-size: 0.95rem; color: #b0b7c3;">&copy; 2025 SCIZYX. All rights reserved.</div>
+    </div>
+  </footer>
+  <script>
+    // Анимация появления секций
+    document.querySelectorAll('.section, .cta-button').forEach(el => el.classList.add('reveal'));
+    function revealOnScroll() {
+      document.querySelectorAll('.reveal').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    // Подсветка активного пункта меню
+    const sectionIds = [
+      'mission',
+      'problems',
+      'solution',
+      'how',
+      'tokenomics',
+      'integrations'
+    ];
+    const navLinks = Array.from(document.querySelectorAll('nav a, #mobileNav a'));
+    function setActiveMenu() {
+      let currentId = '';
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.4) {
+            currentId = id;
+          }
+        }
+      }
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#') && href.slice(1) === currentId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', setActiveMenu);
+    window.addEventListener('load', setActiveMenu);
+  </script>
+</body>
+</html>
